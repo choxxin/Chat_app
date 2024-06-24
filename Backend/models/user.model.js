@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema(
     avatar: {
       type: String,
       required: true,
-      default: "https://api.waifu.pics/sfw/waifu",
+      default: "https://i.waifu.pics/pojy7zt.jpg",
     },
   },
   { timestamps: true }

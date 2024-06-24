@@ -1,7 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import uselogin from "../hooks/uselogin";
 
 function Login() {
+  const [username, setusername] = useState("");
+  const [password, setpassword] = useState("");
+  const { Loading, login } = uselogin();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await login(username, password);
+  };
+
   return (
     <div className="flex flex-col item-center justify-center min-w-96 mx-auto   ">
       <div className="  w-full bg-blue-900 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-15   ">
@@ -21,6 +31,8 @@ function Login() {
                 type="text"
                 placeholder="Enter your username"
                 className="input input-bordered w-full max-w-xs  "
+                value={username}
+                onChange={(e) => setusername(e.target.value)}
               />
             </div>
             <div className="py-6">
@@ -33,6 +45,8 @@ function Login() {
                 type="text"
                 placeholder="Enter your password"
                 className="input input-bordered w-full max-w-xs"
+                value={password}
+                onChange={(e) => setpassword(e.target.value)}
               />
             </div>
           </div>
@@ -40,8 +54,16 @@ function Login() {
             Don't have an account
           </Link>
           <div className="mt-5 mb-7">
-            <button className="btn btn-block btn-md btn-ghost text-gray-200    ">
-              Submit
+            <button
+              className="btn btn-block btn-md btn-ghost text-gray-200    "
+              onClick={handleSubmit}
+              disabled={Loading}
+            >
+              {Loading ? (
+                <span className="loading loading-spinner"></span>
+              ) : (
+                "Login"
+              )}
             </button>
           </div>
         </form>

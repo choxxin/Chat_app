@@ -71,6 +71,7 @@ const login = async (req, res) => {
       _id: user._id,
       fullName: user.fullName,
       username: user.username,
+      avatar: user.avatar,
     });
   } catch (error) {
     res.status(501).json({ error: "Error while Logging in " });
