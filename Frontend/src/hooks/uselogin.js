@@ -26,6 +26,7 @@ const uselogin = () => {
       console.log(error);
       toast.error(error.message);
     } finally {
+      toast.success("Login successful");
       setLoading(false);
     }
   };

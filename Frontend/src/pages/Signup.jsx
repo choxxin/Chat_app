@@ -138,7 +138,7 @@ const SignUp = () => {
                 </span>
               </label>
               <input
-                type="text"
+                type="password"
                 placeholder="Enter Password"
                 className="input input-bordered w-full max-w-xs  "
                 value={Inputs.password}
@@ -155,7 +155,7 @@ const SignUp = () => {
                 </span>
               </label>
               <input
-                type="text"
+                type="password"
                 placeholder="Enter Confirm password"
                 className="input input-bordered w-full max-w-xs"
                 value={Inputs.confirmpassword}

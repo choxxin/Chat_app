@@ -42,7 +42,7 @@ function Login() {
                 </span>
               </label>
               <input
-                type="text"
+                type="password"
                 placeholder="Enter your password"
                 className="input input-bordered w-full max-w-xs"
                 value={password}
