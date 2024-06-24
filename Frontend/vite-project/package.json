@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "start": "node backend/server.js",
+    "build": "npm install && npm install --prefix Frontend/vite-project && npm run build --prefix Frontend/vite-project"
   },
   "dependencies": {
     "anime-images-api": "^2.0.0",

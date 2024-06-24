@@ -2,11 +2,12 @@
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-
+import path from "path";
 // import me from "./../../Frontend/vite-project/src/fetch.js";
 dotenv.config({ path: "./.env" });
 // const app = express();
 // const dotenv = require("dotenv");
+const __dirname = path.resolve();
 const PORT = process.env.PORT || 5000;
 import authRoutes from "./routes/auth.routes.js";
 import connectToMongoDB from "./db/connectTomongodb.js";
@@ -22,6 +23,15 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
+
+app.use(express.static(path.join(__dirname, "/Frontend/vite-project/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "Frontend/vite-project", "dist", "index.html")
+  );
+});
+
 server.listen(PORT, () => {
   connectToMongoDB();
 
