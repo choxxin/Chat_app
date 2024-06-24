@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "start": "node backend/server.js",
-    "build": "npm install && npm install --prefix Frontend/vite-project && npm run build --prefix Frontend/vite-project"
+    "preview": "vite preview"
   },
   "dependencies": {
     "anime-images-api": "^2.0.0",
+    "chat_app": "file:..",
     "http-proxy-middleware": "^3.0.0",
     "nekosapi": "^0.6.3",
     "react": "^18.2.0",
