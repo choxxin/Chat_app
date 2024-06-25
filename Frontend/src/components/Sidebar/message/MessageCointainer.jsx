@@ -2,15 +2,17 @@ import React from "react";
 import { useEffect } from "react";
 import useConversation from "../../../zustamd/useConversations";
 import { useAuthContext } from "../../../context/Authcontext";
-
+import { MdDelete } from "react-icons/md";
 import { TiMessages } from "react-icons/ti";
 import Messages from "./Messages";
 import "../../../../src/index.css";
 
 import MessageInput from "./MessageInput";
+import usedeletemessage from "../../../hooks/usedeletemessage";
+
 const MessageContainer = () => {
   const { selectedConversation, setSelectedConversation } = useConversation();
-
+  const { Spinner, deletemessage } = usedeletemessage();
   useEffect(() => {
     // cleanup function (unmounts)
     return () => setSelectedConversation(null);
@@ -22,10 +24,22 @@ const MessageContainer = () => {
       ) : (
         <>
           {/* Header */}
-          <div className="bg-slate-500 px-4 py-2 mb-2">
+          <div className="bg-slate-500 px-4 py-2 mb-2  flex">
+            {/* <div className="flex flex-col"></div> */}
             <span className="label-text">To:</span>{" "}
             <span className="text-gray-900 font-bold">
               {selectedConversation.fullName}
+            </span>
+            <span className="ml-5 flex">
+              {!Spinner ? (
+                <MdDelete
+                  className="h-6 w-6 text-gray-900 hover:bg-white"
+                  onClick={deletemessage}
+                />
+              ) : (
+                <span className="loading loading-spinner text-info"></span>
+              )}
+              {/* <span className="ml-2" onClick={deletemessage}> Delete All chat</span> */}
             </span>
           </div>
 

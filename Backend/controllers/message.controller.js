@@ -64,4 +64,34 @@ const getMessage = async (req, res) => {
   }
 };
 
-export { sendMessage, getMessage };
+const deleteChat = async (req, res) => {
+  try {
+    const { id: userToChatId } = req.params;
+    const senderId = req.user._id;
+
+    // Find the conversation between the two users
+    const conversation = await Conversation.findOne({
+      participants: { $all: [senderId, userToChatId] },
+    });
+
+    if (!conversation) {
+      return res.status(404).json({ error: "Conversation not found" });
+    }
+
+    // Delete all messages associated with the conversation
+    await Message.deleteMany({
+      _id: { $in: conversation.messages },
+    });
+
+    // Optionally, delete the conversation itself
+    await Conversation.deleteOne({
+      _id: conversation._id,
+    });
+
+    res.status(200).json({ message: "Chat deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: "Error in deleteChat controller" });
+  }
+};
+
+export { sendMessage, getMessage, deleteChat };

@@ -6,6 +6,9 @@ const useConversation = create((set) => ({
     set({ selectedConversation }),
   messages: [],
   setMessages: (messages) => set({ messages }),
+  deletechat: async () => {
+    set({ selectedConversation: null, messages: [] });
+  },
 }));
 
 export default useConversation;
