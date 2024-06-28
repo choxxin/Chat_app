@@ -5,12 +5,23 @@ import toast from "react-hot-toast";
 function useGetMessages() {
   const [Loading, setLoading] = useState(false);
   const { messages, setMessages, selectedConversation } = useConversation();
+
   useEffect(() => {
     const getMessage = async () => {
       setLoading(true);
+      const normalchat = `/api/messages/${selectedConversation._id}`;
+      const groupchat = "/api/messages/grouprec";
       try {
-        const res = await fetch(`/api/messages/${selectedConversation._id}`);
-        const data = await res.json();
+        let response;
+        if (selectedConversation._id === "meow") {
+          response = await fetch(groupchat, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+          });
+        } else {
+          response = await fetch(normalchat);
+        }
+        const data = await response.json();
         if (data.error) {
           throw new Error(data.error);
         }

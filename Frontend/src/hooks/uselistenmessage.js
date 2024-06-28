@@ -6,20 +6,35 @@ import Incomesound from "../assets/Sound/button.mp3";
 
 const useListenMessages = () => {
   const { socket } = useSocketContext();
-  const { messages, setMessages } = useConversation();
+  const { messages, setMessages, selectedConversation } = useConversation();
 
   useEffect(() => {
-    socket?.on("newMessage", (newMessage) => {
-      newMessage.shouldShake = true;
+    if (selectedConversation._id != "meow") {
+      socket?.on("newMessage", (newMessage) => {
+        newMessage.shouldShake = true;
 
-      const soundoutgoing = new Audio(Incomesound);
+        const soundoutgoing = new Audio(Incomesound);
 
-      soundoutgoing.play();
+        soundoutgoing.play();
 
-      setMessages([...messages, newMessage]);
-    });
+        setMessages([...messages, newMessage]);
+      });
+    } else {
+      socket?.on("groupmessage", (newMessage) => {
+        newMessage.shouldShake = true;
 
-    return () => socket?.off("newMessage");
-  }, [socket, setMessages, messages]);
+        const soundoutgoing = new Audio(Incomesound);
+
+        soundoutgoing.play();
+
+        setMessages([...messages, newMessage]);
+      });
+    }
+
+    return () => {
+      socket?.off("newMessage");
+      socket?.off("groupmessage");
+    };
+  }, [socket, setMessages, messages, selectedConversation]);
 };
 export default useListenMessages;

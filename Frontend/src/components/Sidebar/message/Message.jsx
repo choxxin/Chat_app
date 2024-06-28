@@ -7,15 +7,24 @@ function Message({ message }) {
   const { authUser } = useAuthContext();
   const { selectedConversation } = useConversation();
   const mytime = extractTime(message.createdAt);
-
-  const fromme = message.senderId === authUser._id;
-  const sender = fromme ? "You   " : selectedConversation.fullName;
+  // console.log("hii", message.senderId, message.senderId._id);
+  const fromme =
+    message.senderId === authUser._id || message.senderId._id === authUser._id;
+  // const sender = fromme ? "You   " : selectedConversation.fullName;
+  const sender = fromme
+    ? "You"
+    : selectedConversation.fullName ||
+      message.senderId.fullName ||
+      message.fullName;
+  // console.log("meow", message.senderId.avatar);
   const chatclassname = fromme ? "chat-end" : "chart-start";
-  const avatar = fromme ? authUser.avatar : selectedConversation.avatar;
+  const avatar = fromme
+    ? authUser.avatar
+    : selectedConversation.avatar || message.senderId.avatar || message.avatar;
   const bubblecolor = fromme ? "bg-sky-500" : "bg-gray-700";
   const textcolor = fromme ? "text-gray-800" : "text-gray-200";
   const shakeclass = message.shouldShake ? "shake" : "";
-  console.log(avatar);
+  // console.log(avatar);
 
   return (
     <div className={` chat ${chatclassname}  `}>

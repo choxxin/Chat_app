@@ -8,17 +8,27 @@ function useSendMessage() {
 
   const sendMessage = async (message) => {
     setLoading(true);
+    const normalchat = `/api/messages/send/${selectedConversation._id}`;
+    const groupchat = "/api/messages/groupsend";
     try {
-      const res = await fetch(
-        `/api/messages/send/${selectedConversation._id}`,
-        {
+      let res;
+      if (selectedConversation._id === "meow") {
+        res = await fetch(groupchat, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ message }),
-        }
-      );
+        });
+      } else {
+        res = await fetch(normalchat, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ message }),
+        });
+      }
 
       const data = await res.json();
       if (data.error) {

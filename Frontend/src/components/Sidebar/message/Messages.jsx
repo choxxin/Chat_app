@@ -4,8 +4,9 @@ import useGetMessages from "../../../hooks/useGetMessages";
 import useListenMessages from "../../../hooks/uselistenmessage";
 export default function Messages() {
   const { messages, Loading } = useGetMessages();
-  // console.log(messages);\
+
   useListenMessages();
+
   const lastMessageRef = useRef();
 
   useEffect(() => {

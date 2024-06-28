@@ -50,10 +50,10 @@ const Usesignup = () => {
       //context
       setAuthuser(data);
       console.log(data);
+      toast.success("Signup successful");
     } catch (error) {
       toast.error(error.message);
     } finally {
-      toast.success("Login successful");
       setLoading(false);
     }
   };

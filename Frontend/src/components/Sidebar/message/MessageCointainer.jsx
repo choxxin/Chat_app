@@ -28,7 +28,9 @@ const MessageContainer = () => {
             {/* <div className="flex flex-col"></div> */}
             <span className="label-text">To:</span>{" "}
             <span className="text-gray-900 font-bold">
-              {selectedConversation.fullName}
+              {selectedConversation._id === "meow"
+                ? "Everyone"
+                : selectedConversation.fullName}
             </span>
             <span className="ml-5 flex">
               {!Spinner ? (

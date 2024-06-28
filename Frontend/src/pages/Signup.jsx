@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Gender from "./Gender";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -39,8 +39,9 @@ const SignUp = () => {
       }
       const data = await response.json();
       setavatar(data.url);
+
       setLoadingg(false);
-      setInputs({ ...Inputs, avatar: avatar });
+      setInputs({ ...Inputs, avatar: data.url });
     } catch (error) {
       console.error("Error fetching image:", error);
       setLoadingg(false);
@@ -50,6 +51,7 @@ const SignUp = () => {
   const Loadhandler = () => {
     setImageLoad(true);
   };
+
   const [Inputs, setInputs] = useState({
     fullName: "",
     username: "",
@@ -58,6 +60,10 @@ const SignUp = () => {
     gender: "",
     avatar: avatar,
   });
+  useEffect(() => {
+    console.log("Avatar updated:", avatar);
+    setInputs({ ...Inputs, avatar: avatar });
+  }, [avatar]);
 
   const { Loading, signup } = Usesignup();
 
@@ -83,7 +89,7 @@ const SignUp = () => {
             <div className="avatar flex items-center    ">
               <div className="w-28 rounded-xl">
                 {/* <label>Avatar</label> */}
-                <img src={avatar} onLoad={Loadhandler} />
+                <img src={Inputs.avatar} onLoad={Loadhandler} />
               </div>
 
               <button
