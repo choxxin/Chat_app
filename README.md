@@ -34,7 +34,8 @@ A real-time chat application built with the MERN stack (MongoDB, Express, React,
 
    
 
-###LIVE APP
+#LIVE APP
+Here is the direct link of deployed app on render
 ```bash
 --https://chat-app-twsp.onrender.com/
  
