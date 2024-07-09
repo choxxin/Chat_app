@@ -30,10 +30,11 @@ A real-time chat application built with the MERN stack (MongoDB, Express, React,
 1. **Clone the repository:**
 
    ```bash
+   https://github.com/choxxin/Chat_app/tree/main
 
-  
-  (https://github.com/choxxin/Chat_app/tree/main)
+   
 
 ###LIVE APP
+```bash
 --https://chat-app-twsp.onrender.com/
  
